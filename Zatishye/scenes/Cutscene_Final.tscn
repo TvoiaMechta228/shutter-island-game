@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/Cutscene.gd" id="1"]
+
+[node name="Cutscene_Final" type="Node3D"]
+script = ExtResource("1")
+frames = ["Маяк. Верхний этаж.", "«Вы не Виктор Санин. Вы — Иван Кострин.»", "Алиса не погибла в пожаре.", "Она утопила троих детей. Вы застрелили её.", "Всё это — психодрама. Последний шанс перед лоботомией.", "Теперь выбор за вами."]
+durations = [3.0, 4.0, 3.5, 4.0, 4.5, 3.0]
+ambient = "whisper"
+next_scene = "res://scenes/Act5_Finale.tscn"
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.02, 1)
+
+[node name="UI" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Center" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Text" type="Label" parent="UI/Center"]
+custom_minimum_size = Vector2(900, 200)
+theme_override_colors/font_color = Color(0.9, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 32
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Bottom" type="HBoxContainer" parent="UI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+
+[node name="Subtitle" type="Label" parent="UI/Bottom"]
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.5, 0.5, 0.55, 1)
+theme_override_font_sizes/font_size = 16
+text = "ПРОБЕЛ — пропустить"
+horizontal_alignment = 1

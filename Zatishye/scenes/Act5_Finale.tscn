@@ -1,0 +1,230 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/ActController.gd" id="ac"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="pl"]
+[ext_resource type="Script" path="res://scripts/ExitTrigger.gd" id="ex"]
+[ext_resource type="Script" path="res://scripts/Interactable.gd" id="in"]
+[ext_resource type="Script" path="res://scripts/AnagramTrigger.gd" id="an"]
+
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.05, 0.04, 0.03, 1)
+ambient_light_source = 3
+ambient_light_energy = 0.4
+fog_enabled = true
+fog_light_color = Color(0.08, 0.06, 0.04, 1)
+fog_density = 0.03
+
+[sub_resource type="StandardMaterial3D" id="mat_brass"]
+albedo_color = Color(0.45, 0.35, 0.15, 1)
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.3, 0.2, 0.1, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="StandardMaterial3D" id="mat_steel"]
+albedo_color = Color(0.3, 0.3, 0.32, 1)
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="mat_lamp"]
+albedo_color = Color(1, 0.9, 0.5, 1)
+roughness = 0.2
+emission_enabled = true
+emission = Color(1, 0.85, 0.4, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="StandardMaterial3D" id="mat_npc"]
+albedo_color = Color(0.5, 0.18, 0.18, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="mat_glass"]
+albedo_color = Color(0.4, 0.5, 0.7, 0.6)
+transparency = 1
+roughness = 0.05
+metallic = 0.9
+
+[sub_resource type="BoxShape3D" id="npc_shape"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="npc_mesh"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="note_shape"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="BoxMesh" id="note_mesh"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="exit_shape"]
+size = Vector3(4, 3, 2)
+
+[node name="Act5_Finale" type="Node3D"]
+script = ExtResource("ac")
+intro_dialogue = "res://dialogues/act5_intro.json"
+ambient = "whisper"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Floor" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, 0, -0.1, 0)
+use_collision = true
+radius = 4.5
+height = 0.2
+sides = 16
+material = SubResource("mat_steel")
+
+[node name="Ceiling" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, 0, 4, 0)
+use_collision = true
+radius = 4.5
+height = 0.2
+sides = 16
+material = SubResource("mat_steel")
+
+[node name="Wall0" type="CSGBox3D" parent="."]
+transform = Transform3D(1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, 1.0000, 0.0, 2, 4.4)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Wall1" type="CSGBox3D" parent="."]
+transform = Transform3D(0.7071, 0, -0.7071, 0, 1, 0, 0.7071, 0, 0.7071, 3.1112698372208096, 2, 3.1112698372208096)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.0000, 0, -1.0000, 0, 1, 0, 1.0000, 0, 0.0000, 4.4, 2, 2.6942229581241775e-16)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.7071, 0, -0.7071, 0, 1, 0, 0.7071, 0, -0.7071, 3.1112698372208096, 2, -3.111269837220809)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Wall4" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.0000, 0, -0.0000, 0, 1, 0, 0.0000, 0, -1.0000, 5.388445916248355e-16, 2, -4.4)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Wall5" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.7071, 0, 0.7071, 0, 1, 0, -0.7071, 0, -0.7071, -3.111269837220809, 2, -3.11126983722081)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Wall6" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.0000, 0, 1.0000, 0, 1, 0, -1.0000, 0, -0.0000, -4.4, 2, -8.082668874372531e-16)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Wall7" type="CSGBox3D" parent="."]
+transform = Transform3D(0.7071, 0, 0.7071, 0, 1, 0, -0.7071, 0, 0.7071, -3.11126983722081, 2, 3.1112698372208087)
+use_collision = true
+size = Vector3(3.5, 4, 0.15)
+material = SubResource("mat_steel")
+
+[node name="Win0" type="CSGBox3D" parent="."]
+transform = Transform3D(0.9239, 0, -0.3827, 0, 1, 0, 0.3827, 0, 0.9239, 1.6646729307881405, 2.5, 4.018875966424097)
+size = Vector3(2, 2, 0.05)
+material = SubResource("mat_glass")
+
+[node name="Win1" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.3827, 0, -0.9239, 0, 1, 0, 0.9239, 0, -0.3827, 4.018875966424097, 2.5, -1.6646729307881403)
+size = Vector3(2, 2, 0.05)
+material = SubResource("mat_glass")
+
+[node name="Win2" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.9239, 0, 0.3827, 0, 1, 0, -0.3827, 0, -0.9239, -1.6646729307881398, 2.5, -4.018875966424098)
+size = Vector3(2, 2, 0.05)
+material = SubResource("mat_glass")
+
+[node name="Win3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.3827, 0, 0.9239, 0, 1, 0, -0.9239, 0, 0.3827, -4.018875966424097, 2.5, 1.6646729307881414)
+size = Vector3(2, 2, 0.05)
+material = SubResource("mat_glass")
+
+[node name="LampBase" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, 0, 1, 0)
+use_collision = true
+radius = 0.8
+height = 2
+sides = 16
+material = SubResource("mat_brass")
+
+[node name="Lamp" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+use_collision = true
+radius = 0.9
+material = SubResource("mat_lamp")
+
+[node name="LampLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+light_color = Color(1, 0.9, 0.5, 1)
+light_energy = 6.0
+omni_range = 15.0
+shadow_enabled = true
+
+[node name="Machinery1" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, -3, 0.8, 2)
+use_collision = true
+radius = 0.5
+height = 1.6
+sides = 12
+material = SubResource("mat_steel")
+
+[node name="Machinery2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, 3, 0.8, 2)
+use_collision = true
+radius = 0.5
+height = 1.6
+sides = 12
+material = SubResource("mat_steel")
+
+[node name="Machinery3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, -3, 0.8, -2)
+use_collision = true
+radius = 0.5
+height = 1.6
+sides = 12
+material = SubResource("mat_steel")
+
+[node name="Machinery4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, 3, 0.8, -2)
+use_collision = true
+radius = 0.5
+height = 1.6
+sides = 12
+material = SubResource("mat_steel")
+
+[node name="Lesov" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+script = ExtResource("in")
+dialogue_path = "res://dialogues/act5_finale.json"
+sets_flag = "finale_seen"
+
+[node name="Collision" type="CollisionShape3D" parent="Lesov"]
+shape = SubResource("npc_shape")
+
+[node name="Mesh" type="MeshInstance3D" parent="Lesov"]
+mesh = SubResource("npc_mesh")
+surface_material_override/0 = SubResource("mat_npc")
+
+[node name="Player" parent="." instance=ExtResource("pl")]
+transform = Transform3D(1.0000, 0, 0.0000, 0, 1, 0, -0.0000, 0, 1.0000, 0, 1, 3)
+
+[node name="Exit" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3.5)
+script = ExtResource("ex")
+requires_flag = "finale_seen"
+target_act = 99
+
+[node name="Collision" type="CollisionShape3D" parent="Exit"]
+shape = SubResource("exit_shape")
+
